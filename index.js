@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const table = document.getElementById("table");
   const alert = document.getElementById("alert");
   const btn = document.getElementById('add');
+  let id = 1;
+
+  function removeTodo(id) {
+    console.log(id)
+    document.getElementById(id).remove();
+  }
 
   // temos acesso a todas as constantes dentro da nossa função
   function addTodo () {
@@ -16,7 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
     }
     alert.classList.add('d-none');
-    const row = table.insertRow()
+    const row = table.insertRow();
+    row.setAttribute('id', id++);
     row.innerHTML = `
       <td>${title.value}</td>
       <td>${description.value}</td>
@@ -32,6 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const removeBtn = document.createElement('button');
     removeBtn.classList.add('btn', 'btn-danger', 'mb-1', 'ml-1');
     removeBtn.innerHTML = '<i class="fa fa-trash"></i>';
+    removeBtn.onclick = function (e) {
+      removeTodo(row.getAttribute('id'));
+    }
     row.children[3].appendChild(removeBtn);
   }
 
