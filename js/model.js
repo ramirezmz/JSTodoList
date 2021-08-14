@@ -3,7 +3,7 @@ export default class Model {
   constructor() {
     this.view = null;
     this.todos = [];
-
+    this.currentId = 1;
   }
   setView(view){
     this.view = view;
@@ -14,6 +14,17 @@ export default class Model {
   }
 
   addTodo(title, description) {
-    console.log(title, description);
+    const todo = {
+      // si una propiedad es igual a su valor (title: title), podemos usar (title)
+      id: this.currentId++,
+      title,
+      description,
+      completed: false,
+    }
+    this.todos.push(todo);
+    console.log(this.todos);
+
+    // return Object.assign({}, todo) = CLONAR OBJETO
+    return {...todo};
   }
 }
